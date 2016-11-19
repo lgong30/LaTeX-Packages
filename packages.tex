@@ -1,0 +1,141 @@
+%% packages for figures
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{subfigure}
+\usepackage{graphics}
+
+%% packages for citation
+\usepackage[sort]{cite}
+
+%% packages for math
+\usepackage{bbm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{latexsym}
+
+% This package reimplements the LATEX verbatim and verbatim* environments.
+% In addition it provides a comment environment that skips any
+% commands or text between \begin{comment} and the next \end{comment}.
+\usepackage{verbatim}
+
+% The pack­age trans­lates var­i­ous stan­dard and other in­put en­cod­ings into a 
+% ‘LATEX in­ter­nal lan­guage’. The in­ter­nal lan­guage is ex­pressed en­tirely in
+% TEX's base en­cod­ing (stan­dard ASCII print­able char­ac­ters, car­riage con­trol
+% to­kens and TEX con­trol se­quences, the lat­ter mostly de­fined by LATEX).
+\usepackage[latin1]{inputenc}
+
+%% packages for multirow
+\usepackage{multirow}
+
+%% packages for url
+\usepackage{url}
+
+% captions and subcaptions
+% \usepackage[caption=false,position=bottom]{subfig}
+\usepackage{caption}
+\let\subcaption\relax
+\let\subfloat\relax
+%\usepackage{subcaption}
+% \usepackage[caption=false,position=bottom]{subcaption}
+% \let\subbottom\subfloat % to allow use of \subbottom instead of \subfloat
+\captionsetup[figure]{labelfont={bf,small},textfont={it,small}}
+\captionsetup[table]{labelfont={bf,small},textfont={it,small}}
+\captionsetup[subfloat]{labelfont={bf,footnotesize},textfont={it,footnotesize},subrefformat=parens}
+
+% hyperlinks, which caused some fof the grief above
+%\let\captioncaption\caption
+% \usepackage{aliascnt} % for custom autoref
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdftitle={Sample}]{hyperref}
+%\PassOptionsToPackage{unicode}{hyperref}
+
+% use "autoref" the way I want
+%   autoref is nice because the text or brackets of a ref are part of link
+%   see http://tex.stackexchange.com/questions/36575/autorefs-inserted-text-has-not-the-correct-case
+%       http://en.wikibooks.org/wiki/LaTeX/Labels_and_Cross-referencing
+%       http://www.tug.org/applications/hyperref/manual.html#TBL-23
+
+%% define autoref name for sections
+\def\sectionautorefname{\S\!\!}
+\def\subsectionautorefname{\S\!\!}
+\def\subsubsectionautorefname{\S\!\!}
+% from http://tex.stackexchange.com/questions/52410/how-to-use-the-command-autoref-to-implement-the-same-effect-when-use-the-comman
+\def\equationautorefname~#1\null{%
+  (#1)\null
+}
+
+%% packages for algorithms
+\usepackage[lined,boxed,linesnumbered,commentsnumbered]{algorithm2e}
+\usepackage{algpseudocode}
+
+%% change ref of algorithm from 'algorithm x' to 'Procedure x'
+\renewcommand*{\algorithmautorefname}{Procedure}
+\renewcommand{\algorithmcfname}{Procedure}% Update algorithm name
+
+%% change alg settings
+\setlength{\algomargin}{6mm}
+\SetKwInput{Problem}{problem}
+\SetKwInput{Input}{input}
+\SetKwInput{Output}{output}
+\SetAlgoSkip{smallskip} % default
+\SetAlgoInsideSkip{smallskip} %
+\setlength{\AlCapSkip}{1mm} 
+\SetKwComment{tcp}{\#\ }{}
+\SetAlFnt{\small}
+\SetAlCapFnt{\small}
+\SetAlCapNameFnt{\small}
+\SetAlCapHSkip{0pt}
+\IncMargin{-\parindent}
+    
+%% definitions for theorem related
+\newtheorem{theorem}{Theorem}%[section]
+\newtheorem{corollary}{Corollary}%[theorem]
+\newtheorem{lemma}{Lemma}%[theorem]
+\newtheorem{definition}{Definition}%[theorem]
+\newtheorem{fact}{Fact}%[theorem]
+\newtheorem{remark}{Remark}%[theorem]
+
+%% change autoref names for theorem related
+\renewcommand{\theoremautorefname}{Theorem}
+\newcommand*{\lemmaautorefname}{Lemma}
+\newcommand*{\definitionautorefname}{Definition}
+\newcommand*{\corollaryautorefname}{Corollary}
+\newcommand*{\factautorefname}{Fact}
+
+
+%% commonly used math commands
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+\newcommand{\limsup}{\operatornamewithlimits{limsup}}
+\newcommand{\liminf}{\operatornamewithlimits{liminf}}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\mset}[1]{\lbrack #1\rbrack}
+\newcommand{\etal}{{\em et al.}~}
+\newcommand{\ie}{{\em i.e.,} }
+\newcommand{\eg}{{\em e.g.,} }
+\newcommand{\etc}{{\em etc.,} }
+\newcommand{\wrt}{{\em w.r.t.} }
+
+%% reduce spacing
+\setlength{\textfloatsep}{8.0pt plus 1.0pt minus 2.0pt}
+
+%% Redefining itemize to save space
+\newenvironment{sitemize}{%
+  \begin{list}{$\bullet$}{%
+    %\setlength{\rightmargin}{\leftmargin}
+    \setlength{\itemsep}{0.1cm}%
+    \setlength{\leftmargin}{1.0em}%
+    \setlength{\topsep}{0.1cm}%
+    \setlength{\parsep}{0mm}}%
+  }{\end{list}}
+
+\newenvironment{senumerate}{%
+   \begin{list}{\arabic{enumi}.}{%
+    \setlength\labelwidth{3.5em}%
+    \setlength\leftmargin{2.5em}%
+    \setlength{\topsep}{2pt plus 2pt minus 2pt}%
+    \setlength\itemsep{0.0cm}%
+    \usecounter{enumi}}%
+  }{\end{list}}
