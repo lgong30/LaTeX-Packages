@@ -49,6 +49,17 @@
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdftitle={Sample}]{hyperref}
 %\PassOptionsToPackage{unicode}{hyperref}
 
+%% packages for algorithms
+\usepackage[lined,boxed,linesnumbered,commentsnumbered]{algorithm2e}
+\usepackage{algpseudocode}
+
+% The etoolbox package is a toolbox of programming tools geared primarily towards
+% LaTeX class and package authors. It provides LaTeX frontends to some of the new
+% primitives provided by e-TeX as well as some generic tools which are not related to
+% e-TeX but match the profile of this package.
+\usepackage{etoolbox}
+
+
 % use "autoref" the way I want
 %   autoref is nice because the text or brackets of a ref are part of link
 %   see http://tex.stackexchange.com/questions/36575/autorefs-inserted-text-has-not-the-correct-case
@@ -56,17 +67,17 @@
 %       http://www.tug.org/applications/hyperref/manual.html#TBL-23
 
 %% define autoref name for sections
+\ifx\sectionautorefname\undefined
 \def\sectionautorefname{\S\!\!}
 \def\subsectionautorefname{\S\!\!}
 \def\subsubsectionautorefname{\S\!\!}
+\fi
 % from http://tex.stackexchange.com/questions/52410/how-to-use-the-command-autoref-to-implement-the-same-effect-when-use-the-comman
+\ifx\equationautorefname~#1\undefined
 \def\equationautorefname~#1\null{%
   (#1)\null
 }
-
-%% packages for algorithms
-\usepackage[lined,boxed,linesnumbered,commentsnumbered]{algorithm2e}
-\usepackage{algpseudocode}
+\fi
 
 %% change ref of algorithm from 'algorithm x' to 'Procedure x'
 \renewcommand*{\algorithmautorefname}{Procedure}
@@ -87,41 +98,90 @@
 \SetAlCapHSkip{0pt}
 \IncMargin{-\parindent}
     
-%% definitions for theorem related
+%% definitions for theorem related environment and their autoref names
+\ifcsundef{theorem}{% theorem is not defined yet
 \newtheorem{theorem}{Theorem}%[section]
+}{}
+\ifcsundef{corollary}{%
 \newtheorem{corollary}{Corollary}%[theorem]
+}{}
+\ifcsundef{lemma}{%
 \newtheorem{lemma}{Lemma}%[theorem]
+}{}
+\ifcsundef{definition}{%
 \newtheorem{definition}{Definition}%[theorem]
+}{}
+\ifcsundef{fact}{%
 \newtheorem{fact}{Fact}%[theorem]
+}{}
+\ifcsundef{remark}{%
 \newtheorem{remark}{Remark}%[theorem]
+}{}
 
 %% change autoref names for theorem related
+\ifx\theoremautorefname\undefined
 \renewcommand{\theoremautorefname}{Theorem}
+\fi
+\ifx\lemmaautorefname\undefined
 \newcommand*{\lemmaautorefname}{Lemma}
+\fi
+\ifx\definitionautorefname\undefined
 \newcommand*{\definitionautorefname}{Definition}
+\fi
+\ifx\corollaryautorefname\undefined
 \newcommand*{\corollaryautorefname}{Corollary}
+\fi
+\ifx\factautorefname\undefined
 \newcommand*{\factautorefname}{Fact}
+\fi
 
 
 %% commonly used math commands
+\ifx\argmax\undefined
 \newcommand{\argmax}{\operatornamewithlimits{argmax}}
+\fi
+\ifx\argmin\undefined
 \newcommand{\argmin}{\operatornamewithlimits{argmin}}
+\fi
+\ifx\limsup\undefined
 \newcommand{\limsup}{\operatornamewithlimits{limsup}}
+\fi
+\ifx\liminf\undefined
 \newcommand{\liminf}{\operatornamewithlimits{liminf}}
+\fi
+\ifx\norm\undefined
 \newcommand{\norm}[1]{\lVert#1\rVert}
+\fi
+\ifx\abs\undefined
 \newcommand{\abs}[1]{\lvert#1\rvert}
+\fi
+\ifx\set\undefined
 \newcommand{\set}[1]{\left\{#1\right\}}
+\fi
+\ifx\mset\undefined
 \newcommand{\mset}[1]{\lbrack #1\rbrack}
+\fi
+\ifx\etal\undefined
 \newcommand{\etal}{{\em et al.}~}
+\fi
+\ifx\ie\undefined
 \newcommand{\ie}{{\em i.e.,} }
+\fi
+\ifx\eg\undefined
 \newcommand{\eg}{{\em e.g.,} }
+\fi
+\ifx\etc\undefined
 \newcommand{\etc}{{\em etc.,} }
+\fi
+\ifx\wrt\undefined
 \newcommand{\wrt}{{\em w.r.t.} }
+\fi
 
 %% reduce spacing
 \setlength{\textfloatsep}{8.0pt plus 1.0pt minus 2.0pt}
 
 %% Redefining itemize to save space
+\ifcsdef{sitemize}{}{
 \newenvironment{sitemize}{%
   \begin{list}{$\bullet$}{%
     %\setlength{\rightmargin}{\leftmargin}
@@ -130,7 +190,9 @@
     \setlength{\topsep}{0.1cm}%
     \setlength{\parsep}{0mm}}%
   }{\end{list}}
+}
 
+\ifcsdef{senumerate}{}{
 \newenvironment{senumerate}{%
    \begin{list}{\arabic{enumi}.}{%
     \setlength\labelwidth{3.5em}%
@@ -139,3 +201,4 @@
     \setlength\itemsep{0.0cm}%
     \usecounter{enumi}}%
   }{\end{list}}
+}
